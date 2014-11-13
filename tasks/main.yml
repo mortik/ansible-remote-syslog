@@ -41,5 +41,8 @@
     group: root
     mode: 0600
 
+- name: update supervisorctl
+  command: supervisorctl update
+
 - name: restart
-  shell: "sudo supervisorctl restart remote_syslog"
+  command: "sudo supervisorctl restart remote_syslog"
