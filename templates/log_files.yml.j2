@@ -1,0 +1,8 @@
+files:
+{% for item in remote_syslog_files %}
+ - {{item}}
+{% endfor %}
+destination:
+  host: {{ remote_syslog_host }}
+  port: {{ remote_syslog_port }}
+  protocol: {{ remote_syslog_protocol }}

@@ -1,0 +1,45 @@
+---
+- name: download package
+  get_url:
+    url: "{{ remote_syslog_package_url }}"
+    dest: ~/remote_syslog.tar.gz
+    owner: root
+    group: root
+    mode: 0644
+
+- name: unpack package
+  command: tar -xzf remote_syslog.tar.gz
+  args:
+    chdir: ~/
+
+- name: copy binary
+  command: mv remote_syslog /usr/local/bin/remote_syslog
+  args:
+    chdir: ~/remote_syslog
+
+- name: copy log_files.yml
+  template:
+    src: log_files.yml.j2
+    dest: "/etc/log_files.yml"
+    owner: root
+    group: root
+    mode: 0600
+
+- name: install supervisor
+  apt:
+    pkg: "{{ item }}"
+    state: installed
+    update-cache: yes
+  with_items:
+    - supervisor
+
+- name: copy supervisorctl conf
+  template:
+    src: supervisor.j2
+    dest: "/etc/supervisor/conf.d/remote_syslog.conf"
+    owner: root
+    group: root
+    mode: 0600
+
+- name: restart
+  shell: "sudo supervisorctl restart remote_syslog"

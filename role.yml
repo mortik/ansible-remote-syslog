@@ -1,0 +1,10 @@
+---
+- hosts: all
+  remote_user: '{{ root_user }}'
+  sudo: True
+  vars:
+    remote_syslog_files:
+      - foo
+      - bar
+  roles:
+  - ansible-remote-syslog

@@ -1,0 +1,25 @@
+galaxy_info:
+  author: "Marten Klitzke"
+  description: A Simple Role to install Remote Syslog 2
+  license: MIT
+  min_ansible_version: 1.4
+  platforms:
+    - name: Debian
+      versions:
+      - etch
+      - lenny
+      - squeeze
+      - wheezy
+    - name: Ubuntu
+      versions:
+      - precise
+      - quantal
+      - raring
+      - saucy
+  categories:
+   - system
+   - development
+dependencies: [
+
+]
+
